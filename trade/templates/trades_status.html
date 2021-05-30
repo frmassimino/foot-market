@@ -1,0 +1,64 @@
+{% block trades_status %}
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+<table>
+    <tr>
+        <th>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>User</th>
+                    <th>Asset</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                    {% for instance in bid_object_list%}
+                        <tr>
+                            <th>{{instance.id }}</th>
+                            <th>BID</th>
+                            <th>{{instance.owner.username}}</th>
+                            <th>{{ instance.trade}}</th>
+                            <th>{{ instance.value}}</th>
+                            <th>{{ instance.status}}</th>    
+                        </tr>
+                    {% endfor %}
+                </tr>
+            </table>
+        </th>
+        <th>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>User</th>
+                    <th>Asset</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                    {% for instance in ask_object_list%}
+                        <tr>
+                            <th>{{instance.id }}</th>
+                            <th>ASK</th>
+                            <th>{{instance.owner.username}}</th>
+                            <th>{{ instance.trade}}</th>
+                            <th>{{ instance.value}}</th>
+                            <th>{{ instance.status}}</th>    
+                        </tr>
+                    {% endfor %}
+                </tr>
+            </table>
+        </th>
+    </tr>
+</table>
+{% endblock trades_status %}
+

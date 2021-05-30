@@ -1,0 +1,28 @@
+{% extends 'landing.html' %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<br>
+<h1>Bid offer creation</h1>
+{% if messages %}
+{% for message in messages %}
+    <div>
+        <p>{{ message }}</p>
+    </div>
+{% endfor %}
+{% endif %}
+<form method='POST'> {% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value='Create'>
+</form>
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>    
+{% endif %}
+    
+
+
+{% endblock content %}

@@ -1,0 +1,121 @@
+{% extends 'landing.html' %}
+
+{% block content %}
+<style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        /* Create two equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 20%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+        
+        .column1 {
+          float: left;
+          width: 33%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+        .column2 {
+          float: left;
+          width: 80%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        th, td {
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {background-color: #f2f2f2;}
+        </style>
+<br>
+
+{% if request.user.is_authenticated %}
+<div class="row">
+    <div class="column1">
+        <h1>Bid Offers</h1>
+        <table>
+            <tr>
+                <th>Player</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+            {% for instance in bid %}
+            <tr>
+                <td>{{instance.player}}</td>
+                <td>$ {{instance.value}}</td>
+                <td>{{instance.status}}</td> 
+                <td>{{instance.date_updated}}</td>
+            </tr>                
+            {% endfor %}
+        </table>
+    </div>
+    <div class="column1">
+        <h1>Ask Offers</h1>
+        <table>
+            <tr>
+                <th>Player</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+            {% for instance in ask %}
+            <tr>
+                <td>{{instance.player}}</td>
+                <td>$ {{instance.value}}</td>
+                <td>{{instance.status}}</td>
+                <td>{{instance.date_updated}}</td>
+            </tr> 
+            {% endfor %}
+        </table>
+    </div>
+    <div class="column1">
+        <h1>IPO Bids</h1>
+        <table>
+            <tr>
+                <th>Player</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+            {% for instance in bidder %}
+            <tr>
+                <td>{{instance.ipo}}</td>
+                <td>$ {{instance.value}}</td>
+                <td>{{instance.status}}</td>  
+                <td>{{instance.date_updated}}</td>
+            </tr>            
+            {% endfor %}
+        </table>
+    </div>
+</div>  
+{% else %}
+<br>
+<br>
+<div align="center">
+  <h2>You must log in first ...</h2>
+</div>
+{% endif %}
+
+  
+
+
+{% endblock content %}

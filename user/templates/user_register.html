@@ -1,0 +1,77 @@
+{% extends 'landing.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<br>
+<br>
+<div align="center">
+        <br>
+        <h2>You're already registered...</h2>
+    </div> 
+{% else %}
+<style>
+        div.a {
+          line-height: 30%;
+          font-size: 12px;
+        }
+</style>
+<h1>User Registration</h1>
+<br>
+<form method='POST'> {% csrf_token %}
+        <div>
+        
+                <label for="id_username">Username:</label> 
+                <input type="text" name="username" maxlength="150" autofocus required id="id_username"> 
+                <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+        
+        </div>
+        <div>
+        
+                <label for="id_first_name">First name:</label> 
+                <input type="text" name="first_name" required id="id_first_name">
+        
+        </div>
+        <div>
+        
+                    <label for="id_last_name">Last name:</label> 
+                    <input type="text" name="last_name" required id="id_last_name">
+            
+        </div>
+        <div>
+            
+                    <label for="id_email">Email:</label> 
+                    <input type="email" name="email" required id="id_email">
+            
+        </div>
+        <div>
+            
+                    <label for="id_age">Age:</label> 
+                    <input type="number" name="age" required id="id_age">
+            
+        </div>
+        <br>
+        <div>
+        
+            <label for="id_password1">Password:</label> 
+            <input type="password" name="password1" required id="id_password1"> 
+            <div class="a">
+                <p>Your password can&#39;t be too similar to your other personal information.</p>
+                <p>Your password must contain at least 8 characters.</p>
+                <p>Your password can&#39;t be a commonly used password.</p>
+                <p>Your password can&#39;t be entirely numeric.</p>
+            </div>
+        </div>
+        <div>
+            <label for="id_password2">Password confirmation:</label> 
+            <input type="password" name="password2" required id="id_password2"> 
+            <div class="a">
+                <p>Enter the same password as before, for verification.</p>
+            </div>
+            <input type="hidden" name="funds" id="id_funds">
+        </div>
+    <br>
+        <div>
+            <input type='submit' value='Register'>
+        </div>
+    </form> 
+{% endif %}
+{% endblock content %}

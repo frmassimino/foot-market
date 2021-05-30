@@ -1,0 +1,39 @@
+{% extends 'landing.html' %}
+
+
+{% block content %}
+
+{% if request.user.is_authenticated  %}
+
+{% if request.user == object.bidder and object.status == 'Set' %}
+<br>
+<br>
+{% if messages %}
+{% for message in messages  %}
+    <div>
+        <p>{{ message }}</p>
+    </div>
+{% endfor %}
+{% endif %}
+<form method='POST'> {% csrf_token %}
+    <h1>Do you want to delete the IPO bid for "{{object.ipo}}"?</h1>
+    <br>
+    <br>
+    <p><input type='submit' value='Yes'> <a href='/user/user_overview/'>Cancel</a></p>
+</form>
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>  
+{% endif %}
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>  
+{% endif %}
+    
+
+
+{% endblock content %}

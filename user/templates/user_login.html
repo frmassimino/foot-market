@@ -1,0 +1,25 @@
+{% extends 'landing.html' %}
+
+{% block content %}
+<style>
+    div{text-align: center;
+        align-content: center;}
+</style>
+
+{% if request.user.is_authenticated %}
+<br>
+<br>
+<div>
+    <h2>You're already logged in ...</h2>
+</div>
+{% else %}
+<br>
+<br>
+<h1>User login</h1>
+
+<form method='POST'> {% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value='Login'>
+</form>
+{% endif %}
+{% endblock content %}

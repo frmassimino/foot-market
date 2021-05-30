@@ -1,0 +1,28 @@
+{% extends 'landing.html' %}
+
+{% block content %}
+<style>
+    div{text-align: center}
+</style>
+    {% if request.user.is_authenticated %}
+    <br>
+    <br>
+    <h1>New around the block?...</h1>
+    <br>
+    <h3>Instructions</h3>
+    <br>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget commodo leo. Nullam dapibus volutpat tellus, in aliquet augue vehicula in. Morbi sit amet sollicitudin quam. Vivamus non pulvinar risus, nec mattis tortor. Morbi nec leo aliquet, rutrum urna vel, blandit quam. Nullam sodales neque nisi, non ultrices massa suscipit eu. Etiam bibendum elit sit amet pretium ultrices. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse condimentum orci eu massa euismod feugiat. Etiam nec tortor eros.
+
+            Sed at nunc ac diam maximus vestibulum in vitae quam. Duis suscipit iaculis neque, ac convallis tortor rhoncus ac. Ut et imperdiet elit, nec porttitor lorem. Nullam a mi et arcu fermentum aliquam sed a eros. Vestibulum eleifend, urna ut vulputate tempor, est velit lobortis sem, vel pretium tellus justo eu dui. Integer a leo ante. Nullam ac semper odio, vitae efficitur massa. Phasellus condimentum lobortis feugiat. Morbi vestibulum ipsum non sapien semper, sit amet cursus justo ullamcorper. </p>
+    {% else %}
+    <br>
+    <br>
+    <h1>Feel like the Wolf of BallStreet</h1>
+    <br>
+    <br>
+    <h2>Come back home when you had already registered...</h2>          
+    {% endif %}
+    <br>
+    <br>
+    <h4>Feel free to make a <a href="/donations/">donation</a> to help us keep on with the development!</h4>
+{% endblock content %}

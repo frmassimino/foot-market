@@ -1,0 +1,56 @@
+{% extends 'landing.html' %}
+{% block content %}
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+{% if request.user.is_authenticated %} 
+<br>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Team</th>
+        <th>Variation</th>
+        <th>Price</th>
+        <th>Last Price</th>
+        <th>Last IPO</th>
+        <th>Rating</th>
+        <th colspan="2" style="text-align:center">Options</th>
+    </tr>
+        {% for instance in object_list%}
+            <tr>
+                <td><a href="/trade/{{instance.id}}/trade_overview">{{instance.name}} {{instance.surname}}</a></td>
+                <td>{{ instance.team}}</td>
+                {% if instance.price_actual == instance.price_last %}
+                <td style="color:blue">{{instance.get_value_percentege}} %</td>
+                {% elif instance.price_actual > instance.price_last %}
+                <td style="color:green">{{instance.get_value_percentege}} %</td>
+                {% else %}
+                <td style="color: red">{{instance.get_value_percentege}} %</td>    
+                {% endif %}
+                <td>$ {{ instance.price_actual}}</td>
+                <td>$ {{ instance.price_last }}</td>
+                <td>$ {{ instance.ipo_last }}</td>
+                <td>{{ instance.rating}}</td>
+                <td style="text-align:center"><a href="/trade/{{instance.id}}/bid_create">Bid</a></td>
+                <td style="text-align:center"><a href="/trade/{{instance.id}}/ask_create">Ask</a></td>
+            </tr>
+        {% endfor %}
+</table>
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>
+{% endif%}
+
+{% endblock content %}

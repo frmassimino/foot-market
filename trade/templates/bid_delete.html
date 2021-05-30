@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+{% if messages %}
+{% for message in messages  %}
+    <div>
+        <p>{{ message }}</p>
+    </div>
+{% endfor %}    
+{% endif %} 
+
+{% if request.user == object.owner and object.status == 'Set' %}
+<form method='POST'> {% csrf_token %}
+        <h1>Do you want to delete the bid offer?</h1>
+        <p><input type='submit' value='Yes'><a href='/user/user_overview/'>Cancel</a></p>
+    </form>
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>
+{% endif %}
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>  
+{% endif %}
+    
+
+
+{% endblock content %}

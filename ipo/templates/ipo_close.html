@@ -1,0 +1,20 @@
+{% extends 'landing.html' %}
+
+
+{% block content %}
+
+{% if request.user.is_superuser %}
+<br>
+<h2>Closing Ipo...</h2>
+<br>
+<p>{{ result }}</p>
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>
+{% endif %}
+    
+
+{% endblock content %}
+    

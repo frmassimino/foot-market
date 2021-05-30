@@ -1,0 +1,81 @@
+{% extends 'landing.html' %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      vertical-align: top;
+    }
+    
+    th, td {
+      text-align: center;
+      padding: 8px;
+      vertical-align: top;
+    }
+    
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+<br>
+<br>
+<div align="center">
+    <h1>{{object_list}}</h1>
+</div>
+<br>
+<table>
+    <tr>
+        <th>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>User</th>
+                    <th>Value</th>
+                    {% for instance in bid_object_list%}
+                    {% if instance.status == 'Set' %}    
+                        <tr>
+                            <th>{{instance.id }}</th>
+                            <th>BID</th>
+                            <th>{{instance.owner.username}}</th>
+                            <th>{{ instance.value}}</th>    
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </table>
+        </th>
+        <th>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>User</th>
+                    <th>Value</th>
+                    {% for instance in ask_object_list%}
+                    {% if instance.status == 'Set' %}    
+                        <tr>
+                            <th>{{instance.id }}</th>
+                            <th>ASK</th>
+                            <th>{{instance.owner.username}}</th>
+                            <th>{{ instance.value}}</th>   
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </table>
+        </th>
+    </tr>
+</table>
+{% else %}
+<br>
+<br>
+<br>
+<div align="center"><h2>You're not supposed to be here...</h2></div>
+{% endif %}
+    
+
+{% endblock content %}
+
+    

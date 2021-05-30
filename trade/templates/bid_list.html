@@ -1,0 +1,22 @@
+{% block content %}
+<table border = 1px >
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>User</th>
+            <th>Asset</th>
+            <th>Value</th>
+            <th>Status</th>
+            {% for instance in object_list%}
+                <tr>
+                    <th>{{instance.id }}</th>
+                    <th>BID</th>
+                    <th>{{instance.owner.username}}</th>
+                    <th>{{ instance.trade}}</th>
+                    <th>{{ instance.value}}</th>
+                    <th>{{ instance.status}}</th>    
+                </tr>
+            {% endfor %}
+        </tr>
+    </table>
+ {% endblock content %}

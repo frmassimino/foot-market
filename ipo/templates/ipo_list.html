@@ -1,0 +1,67 @@
+{% extends 'landing.html' %}
+
+
+{% block content %}
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+<br>
+
+{% if request.user.is_authenticated %}
+<table>
+        <tr>
+            <th>ID</th>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Start Price</th>
+            <th>Count</th>
+            <th>Status</th>
+            <th>Options</th>
+            {% if request.user.is_superuser %}
+            <th>Admin</th>    
+            {% endif %}
+        </tr>
+            {% for instance in object_list%}
+                <tr>
+                    <td>{{instance.id }}</td>
+                    <td>{{instance.player}}</td>
+                    <td>{{instance.player.team}}</td>
+                    <td>{{instance.start_price}}</td>
+                    <td>{{instance.ipo_count}}</td>
+                    <td>{{instance.status}}</td>
+                    {% if instance.status == 'Open' %}
+                    <td><a href="/ipo/{{instance.id}}/ipo_bid">Bid</a></td>
+                    {% if request.user.is_superuser %}
+                    <td><a href="/ipo/{{instance.id}}/ipo_close">Close</a></td>   
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                    {% else %}
+                    <td></td>
+                    <td></td>
+                    {% endif %}
+                    
+                </tr>
+            {% endfor %}
+    </table> 
+{% else %}
+<br>
+<br>
+<div align="center">
+    <h2>You're not supposed to be here...</h2>
+</div>
+{% endif %}
+    
+ 
+{% endblock content %}
+    

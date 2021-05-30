@@ -1,0 +1,179 @@
+{% extends 'landing.html' %}
+
+{% block content %}
+<style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        /* Create two equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 20%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+        
+        .column1 {
+          float: left;
+          width: 33%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+        .column2 {
+          float: left;
+          width: 80%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        th, td {
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {background-color: #f2f2f2;}
+        </style>
+
+{% if request.user.is_authenticated %}
+<div class="row">
+        <div class="column">
+            <br>
+            <br>
+            <h4>{{request.user.username|capfirst}}</h4>
+            <h4>{{request.user.first_name|capfirst}}</h4>
+            <h4>{{request.user.last_name|capfirst}}</h4>
+            <h4>$ {{request.user.funds}}</h4>
+            <h4><a href="/user/user_history/">Trade History</a></h4>
+    </div>
+    <div class="column2">
+        <div><h1>Portfolio</h1></div>
+        <div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Compromised</th>
+                    <th>Total Value</th>
+                    <th>Actual Price</th>
+                    <th>Last Price</th>
+                    <th>Variation</th>
+                </tr>
+                {% for instance in portfolio %}
+                <tr>
+                    <td>{{instance.player}}</td>
+                    <td>{{instance.count}}</td>
+                    <td>{{instance.compromised}}</td>
+                    <td>$ {{instance.get_value_total}}</td>
+                    <td>$ {{instance.get_value_actual}}</td>
+                    <td>$ {{instance.get_value_last}}</td>
+                    {% if instance.get_value_actual == instance.get_value_last %}
+                    <td style="color:blue">{{instance.get_value_percentege}} %</td>
+                    {% elif instance.get_value_actual > instance.get_value_last %}
+                    <td style="color:green">{{instance.get_value_percentege}} %</td>
+                    {% else %}
+                    <td style="color: red">{{instance.get_value_percentege}} %</td>
+                    {% endif %}
+                </tr> 
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+            <div class="column1">
+                <h1>Bid Offers</h1>
+                <table>
+                    <tr>
+                        <th>Player</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
+                    {% for instance in bid %}
+                    {% if instance.status == 'Set' %}
+                    <tr>
+                        <td>{{instance.player}}</td>
+                        <td>$ {{instance.value}}</td>
+                        <td>{{instance.status}}</td> 
+                        <td>
+                            <a href="/trade/{{instance.id}}/bid_update/">Edt</a>
+                            <a href="/trade/{{instance.id}}/bid_delete/">Del</a>
+                        </td>
+                    </tr>  
+                    {% endif %}                
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="column1">
+                <h1>Ask Offers</h1>
+                <table>
+                    <tr>
+                        <th>Player</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
+                    {% for instance in ask %}
+                    {% if instance.status == 'Set' %}
+                    <tr>
+                        <td>{{instance.player}}</td>
+                        <td>$ {{instance.value}}</td>
+                        <td>{{instance.status}}</td>
+                        <td>
+                            <a href="/trade/{{instance.id}}/ask_update/">Edt</a>
+                            <a href="/trade/{{instance.id}}/ask_delete/">Del</a>
+                        </td>
+                    </tr> 
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="column1">
+                <h1>IPO Bids</h1>
+                <table>
+                    <tr>
+                        <th>Player</th>
+                        <th>Value</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
+                    {% for instance in bidder %}
+                    {% if instance.status == 'Set'  %}
+                    <tr>
+                        <td>{{instance.ipo}}</td>
+                        <td>$ {{instance.value}}</td>
+                        <td>{{instance.status}}</td>  
+                        <td>
+                            <a href="/ipo/{{instance.id}}/ipo_update/">Edt</a>
+                            <a href="/ipo/{{instance.id}}/ipo_delete/">Del</a>
+                        </td>
+                    </tr> 
+                    {% endif %}                
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+{% else %}
+<br>
+<br>
+<div align="center">
+        <h2>You must log in first ...</h2>
+      </div>
+{% endif %}
+
+    
+
+
+{% endblock content %}
