@@ -82,14 +82,14 @@ WSGI_APPLICATION = 'foot_market.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'foot_marketDB',
-        'USER': 'postgres',
-        'PASSWORD': 'aLASdklae43r42+tr-f',
-        'HOST': 'localhost',
-        'PORT': '5433'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'foot_marketDB',
+        #'USER': 'postgres',
+        #'PASSWORD': '',
+        #'HOST': 'localhost',
+        #'PORT': '5433'
     }
 }
 
