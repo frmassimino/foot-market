@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.shortcuts import render_to_response
-from django.template import RequestContext
 
 # Create your views here.
 ERROR_500_TEMPLATE_NAME = '500.html'

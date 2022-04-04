@@ -1,15 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 #from django.contrib.admin.views.decorators import staff_member_required
 from django.views import View
 
 from .models import CustomUser, Portfolio
 from ipo.models import Bidder
 from trade.models import Bid, Ask 
-from .forms import UserModelForm
 #from .forms import UserModelForm
 #---------------------------------------
-from django.utils.http import is_safe_url
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login, logout as auth_logout
 from django.utils.decorators import method_decorator
